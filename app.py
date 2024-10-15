@@ -2,8 +2,10 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
-#from tensorflow.keras.models import load_model # type: ignore
+from sklearn.preprocessing import MinMaxScaler
 import streamlit as st
+from keras_models import load_model 
+
 
 start= "2010-01-01"
 end= "2024-01-01"
@@ -49,13 +51,12 @@ data_training=pd.DataFrame(df['Close'][0:int(len(df)*0.80)])
 data_testing=pd.DataFrame(df['Close'][int(len(df)*0.80):int(len(df))])
 
 #scaling the data 
-from sklearn.preprocessing import MinMaxScaler
 scaler=MinMaxScaler(feature_range=(0,1))
 
 data_training_array =scaler.fit_transform(data_training)
 
 #load my model
-model =load_model('keras_model.h5')
+model = load_model('keras_model.h5')
 
 
 #testing part
@@ -63,7 +64,7 @@ past_100_days = data_training.tail(100)
 final_df= pd.concat([past_100_days, data_testing], ignore_index=True)
 input_data = scaler.fit_transform(final_df)
 
-
+#preparing the test data 
 x_test=[]
 y_test=[]
 

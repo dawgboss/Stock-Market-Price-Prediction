@@ -4,7 +4,7 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 import streamlit as st
-from keras_models import load_model 
+from keras.models import load_model 
 
 
 start= "2010-01-01"
